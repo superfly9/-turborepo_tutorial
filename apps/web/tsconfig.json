@@ -4,8 +4,10 @@
     "plugins": [
       {
         "name": "next"
-      }
-    ]
+      },
+    ],
+    "esModuleInterop": true,
+    "moduleResolution": "Node"
   },
   "include": [
     "next-env.d.ts",
