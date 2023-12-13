@@ -8,9 +8,11 @@ import { headers } from "next/headers";
 type Option = {
   cache: "force-cache";
 };
+
 async function getData(url: string, option?: Option) {
   const host = headers().get("host");
   const res = await fetch(`http://${host}${url}`, option);
+
   if (!res.ok) {
     // This will activate the closest `error.js` Error Boundary
     throw new Error("Failed to fetch data");
@@ -19,8 +21,14 @@ async function getData(url: string, option?: Option) {
 }
 
 export default async function Page(): Promise<JSX.Element> {
-  await getData("/api/user", {
+  const { res } = await getData("/api/user", {
     cache: "force-cache",
   });
-  return <main className={styles.main}></main>;
+  return (
+    <main className={styles.main}>
+      {res.map((name: string) => (
+        <li>{name}</li>
+      ))}
+    </main>
+  );
 }
