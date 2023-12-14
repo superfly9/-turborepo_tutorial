@@ -1,34 +1,55 @@
-import Image from "next/image";
+"use client";
 import styles from "./page.module.css";
-import { headers } from "next/headers";
-// import { Card } from "@repo/ui/card";
-// import { Code } from "@repo/ui/code";
-// import { Button } from "@repo/ui/button";
+import { useEffect, useRef, useState } from "react";
 
-type Option = {
-  cache: "force-cache";
-};
-
-async function getData(url: string, option?: Option) {
-  const host = headers().get("host");
-  const res = await fetch(`http://${host}${url}`, option);
-
-  if (!res.ok) {
+async function getData(url: string, count: number) {
+  const response = await fetch(`./${url}?count=${count}`);
+  if (!response.ok) {
     // This will activate the closest `error.js` Error Boundary
     throw new Error("Failed to fetch data");
   }
-  return res.json();
+  return response.json();
 }
 
-export default async function Page(): Promise<JSX.Element> {
-  const { res } = await getData("/api/user", {
-    cache: "force-cache",
-  });
+export default function Page(): JSX.Element {
+  const [list, setList] = useState<string[]>([]);
+
+  const target = useRef(null);
+
+  useEffect(() => {
+    getData("/api/user", 10).then((v) => {
+      setList(v);
+    });
+  }, []);
+
+  useEffect(() => {
+    let observer: IntersectionObserver;
+    if (target.current) {
+      observer = new IntersectionObserver(async ([entry]) => {
+        if (entry?.isIntersecting) {
+          const newList = await getData("/api/user", 10);
+          setList((v) => [...v, ...newList]);
+        }
+      });
+      observer?.observe(target.current);
+    }
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <main className={styles.main}>
-      {res.map((name: string) => (
-        <li>{name}</li>
+    <main
+      className={styles.main}
+      style={{ display: "flex", flexDirection: "column" }}
+    >
+      {list.map((name: string, index) => (
+        <li
+          style={{ display: "block", height: "20vh" }}
+          key={`${name} - ${index}`}
+        >
+          {name}
+        </li>
       ))}
+      <div ref={target} />
     </main>
   );
 }

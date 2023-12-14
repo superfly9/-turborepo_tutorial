@@ -3,5 +3,5 @@ import { NextResponse } from 'next/server';
 
 export async function GET() {
     const res = faker.helpers.multiple(faker.person.firstName, { count: 10 })
-    return NextResponse.json({res})
+    return NextResponse.json(res)
 }
