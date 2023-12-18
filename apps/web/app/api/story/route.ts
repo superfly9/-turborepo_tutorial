@@ -1,11 +1,7 @@
 import { faker } from '@faker-js/faker';
 import { NextResponse } from 'next/server';
 
-interface User {
-    [key:string] : string | number | Date;
-}
-
-function createRandomUser(): User {
+function createRandomUser() {
     const sex = faker.person.sexType();
     const firstName = faker.person.firstName(sex);
     const lastName = faker.person.lastName();
@@ -25,6 +21,8 @@ function createRandomUser(): User {
       subscriptionTier: faker.helpers.arrayElement(['free', 'basic', 'business']),
     };
   }
+
+  export type RandomUser = ReturnType<typeof createRandomUser>
   
 export async function GET() {
     const res = faker.helpers.multiple(createRandomUser, { count: 10 })

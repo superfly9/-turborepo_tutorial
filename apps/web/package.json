@@ -8,6 +8,10 @@
     "start": "next start",
     "lint": "eslint . --max-warnings 0"
   },
+  "reactStrictMode": true,
+  "transpilePackages": [
+    "ui"
+  ],
   "dependencies": {
     "@repo/ui": "*",
     "next": "^14.0.3",
