@@ -9,12 +9,15 @@ function createRandomUser() {
       firstName,
       lastName,
     ]);
+    
   
     return {
       _id: faker.string.uuid(),
       avatar: faker.image.avatar(),
       birthday: faker.date.birthdate(),
+      description:faker.commerce.productDescription(),
       email,
+      avatarImg : faker.image.avatar(),
       firstName,
       lastName,
       sex,

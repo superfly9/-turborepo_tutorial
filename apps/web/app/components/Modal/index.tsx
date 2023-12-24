@@ -1,13 +1,13 @@
 import React from "react";
 import { ModalInfo } from "../Story";
-import { Button } from "@repo/ui/button";
+import { Button } from "@repo/ui/src/button";
 
-function Modal({ title, content, id }: ModalInfo) {
+function Modal({ title, content, onClick }: ModalInfo) {
   return (
     <>
       <div>{title}</div>
       <div>{content}</div>
-      <Button id={id}>Close</Button>
+      <Button onClick={onClick} children={title} />
     </>
   );
 }
