@@ -1,40 +1,39 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { getData } from "../../util/fetch";
+import { RandomUser } from "../../api/user/route";
+import Image from "next/image";
 
 function Feed() {
-  const [list, setList] = useState<string[]>([]);
+  const [list, setList] = useState<RandomUser[]>([]);
 
   const target = useRef(null);
 
   useEffect(() => {
-    getData("/api/user", 10).then((v) => {
-      setList(v);
-    });
-  }, []);
-
-  useEffect(() => {
     let observer: IntersectionObserver;
-    if (target.current) {
+    if (target?.current) {
       observer = new IntersectionObserver(async ([entry]) => {
         if (entry?.isIntersecting) {
-          const newList = await getData("/api/user", 10);
+          const newList = await getData<RandomUser>("/api/user", 10);
           setList((v) => [...v, ...newList]);
         }
       });
-      observer?.observe(target.current);
+      observer?.observe(target?.current);
     }
-    return () => observer.disconnect();
-  }, []);
+    return () => observer?.disconnect();
+  }, [target?.current]);
 
   return (
     <div>
-      {list.map((name: string, index) => (
-        <li
-          style={{ display: "block", height: "20vh" }}
-          key={`${name} - ${index}`}
-        >
-          {name}
+      {list.map(({ _id, avatar, description, firstName, lastName }) => (
+        <li style={{ display: "block", height: "20vh" }} key={_id}>
+          <Image
+            src={avatar}
+            alt={`${firstName}${lastName}_profile`}
+            width={50}
+            height={50}
+          />
+          {description}
         </li>
       ))}
       <div ref={target} />

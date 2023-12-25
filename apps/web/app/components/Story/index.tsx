@@ -2,8 +2,8 @@
 import React, { useState, useEffect } from "react";
 import { getData } from "../../util/fetch";
 import { Button } from "@repo/ui/src/button";
-import { RandomUser } from "../../api/story/route";
 import Modal from "../Modal";
+import { RandomStory } from "../../api/story/route";
 
 export interface ModalInfo {
   title: string;
@@ -12,15 +12,15 @@ export interface ModalInfo {
 }
 
 function Story() {
-  const [storyList, setStoryList] = useState<RandomUser[]>([]);
-  const [openModalInfo, setOpenModalInfo] = useState<RandomUser | null>(null);
+  const [storyList, setStoryList] = useState<RandomStory[]>([]);
+  const [openModalInfo, setOpenModalInfo] = useState<RandomStory | null>(null);
 
   useEffect(() => {
-    getData("/api/story", 10).then((v) => {
-      setStoryList(v);
+    getData<RandomStory>("/api/story", 10).then((v) => {
+      setStoryList([...v]);
     });
   }, []);
-  const handleClick = (modalContent: RandomUser) => {
+  const handleClick = (modalContent: RandomStory) => {
     setOpenModalInfo(modalContent);
   };
 
@@ -33,12 +33,14 @@ function Story() {
     <div>
       {storyList.map((v) => (
         <Button onClick={() => handleClick(v)} key={v._id}>
-          {v.firstName} {v.lastName}
+          <p>
+            {v.firstName} {v.lastName}
+          </p>
         </Button>
       ))}
       {openModalInfo && (
         <Modal
-          title={openModalInfo.subscriptionTier}
+          title={openModalInfo.title}
           content={openModalInfo.description}
           onClick={handleModalClick}
         />

@@ -1,4 +1,4 @@
-async function getData(url: string, count: number) {
+async function getData<T>(url: string, count: number) : Promise<Array<T>> {
     const response = await fetch(`./${url}?count=${count}`);
     if (!response.ok) {
       // This will activate the closest `error.js` Error Boundary
