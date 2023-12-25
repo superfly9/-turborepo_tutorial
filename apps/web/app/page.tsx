@@ -1,6 +1,6 @@
-import Feed from "./components/Feed";
-import Story from "./components/Story";
-import styles from "./page.module.css";
+import Feed from "app/components/Feed";
+import Story from "app/components/Story";
+import styles from "app/page.module.css";
 
 export default function Page(): JSX.Element {
   return (

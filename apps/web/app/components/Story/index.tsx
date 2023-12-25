@@ -1,9 +1,9 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { getData } from "../../util/fetch";
+import { getData } from "app/util/fetch";
 import { Button } from "@repo/ui/src/button";
-import Modal from "../Modal";
-import { RandomStory } from "../../api/story/route";
+import Modal from "app/components/Modal";
+import { RandomStory } from "app/api/story/route";
 
 export interface ModalInfo {
   title: string;

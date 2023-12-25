@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import { getData } from "../../util/fetch";
-import { RandomUser } from "../../api/user/route";
+import { getData } from "app/util/fetch";
+import { RandomUser } from "app/api/user/route";
 import Image from "next/image";
 
 function Feed() {
