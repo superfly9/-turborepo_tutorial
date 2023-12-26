@@ -1,6 +1,6 @@
-import Feed from "app/components/Feed";
-import Story from "app/components/Story";
-import styles from "app/page.module.css";
+import Feed from "component/Feed";
+import Story from "component/Story";
+import styles from "./page.module.css";
 
 export default function Page(): JSX.Element {
   return (
@@ -13,3 +13,4 @@ export default function Page(): JSX.Element {
     </main>
   );
 }
+// As of TypeScript 4.1, baseUrl is no longer required to be set when using paths.

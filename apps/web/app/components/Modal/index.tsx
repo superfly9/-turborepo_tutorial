@@ -1,5 +1,5 @@
 import React from "react";
-import { ModalInfo } from "../Story";
+import { ModalInfo } from "component/Story";
 import { Button } from "@repo/ui/src/button";
 
 function Modal({ title, content, onClick }: ModalInfo) {
