@@ -1,0 +1,13 @@
+.wrapper {
+  display: flex;
+  gap: 10px;
+}
+.story_profile {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  overflow: hidden;
+  border: 2px solid #fbaa47;
+  border-radius: 50%;
+  padding: 2px;
+}

@@ -4,6 +4,8 @@ import { getData } from "app/util/fetch";
 import { Button } from "@repo/ui/src/button";
 import Modal from "component/Modal";
 import { RandomStory } from "api/story/route";
+import Image from "next/image";
+import styles from "./Story.module.css";
 
 export interface ModalInfo {
   title: string;
@@ -30,12 +32,14 @@ function Story() {
   }
 
   return (
-    <div>
-      {storyList.map((v) => (
-        <Button onClick={() => handleClick(v)} key={v._id}>
-          <p>
-            {v.firstName} {v.lastName}
-          </p>
+    <div className={styles.wrapper}>
+      {storyList.map(({ avatar, _id, firstName, ...rest }) => (
+        <Button
+          className={styles.story_profile}
+          onClick={() => handleClick({ avatar, _id, firstName, ...rest })}
+          key={_id}
+        >
+          <Image src={avatar} fill alt={firstName} />
         </Button>
       ))}
       {openModalInfo && (
