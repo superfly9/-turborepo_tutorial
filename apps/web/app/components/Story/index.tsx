@@ -11,6 +11,7 @@ export interface ModalInfo {
   title: string;
   content: any;
   onClick: () => void;
+  onClose: () => void;
 }
 
 function Story() {
@@ -47,6 +48,7 @@ function Story() {
           title={openModalInfo.title}
           content={openModalInfo.description}
           onClick={handleModalClick}
+          onClose={() => setOpenModalInfo(null)}
         />
       )}
     </div>

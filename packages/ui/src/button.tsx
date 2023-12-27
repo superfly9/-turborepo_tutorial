@@ -5,7 +5,7 @@ import { ReactNode } from "react";
 interface ButtonProps {
   children: ReactNode;
   className?: string;
-  onClick: (param?: any) => any;
+  onClick: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => any;
 }
 
 export const Button = ({ children, className, onClick }: ButtonProps) => {

@@ -18,7 +18,8 @@
       },
     ],
     "esModuleInterop": true,
-    "moduleResolution": "Node"
+    "moduleResolution": "Node",
+    "noImplicitAny": true
   },
   "include": [
     "next-env.d.ts",
