@@ -5,6 +5,7 @@
   left: 0;
   right: 0;
   background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
 }
 .modal_content {
   width: 50%;
@@ -15,4 +16,12 @@
   cursor: pointer;
   transform: translate3d(-50%, -50%, 0);
   background-color: rgba(255, 255, 255);
+}
+
+.closeBtn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20px;
+  height: 20px;
 }

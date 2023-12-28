@@ -7,13 +7,6 @@ import { RandomStory } from "api/story/route";
 import Image from "next/image";
 import styles from "./Story.module.css";
 
-export interface ModalInfo {
-  title: string;
-  content: any;
-  onClick: () => void;
-  onClose: () => void;
-}
-
 function Story() {
   const [storyList, setStoryList] = useState<RandomStory[]>([]);
   const [openModalInfo, setOpenModalInfo] = useState<RandomStory | null>(null);
@@ -27,7 +20,6 @@ function Story() {
     setOpenModalInfo(modalContent);
   };
 
-  const handleModalClick = () => {};
   if (storyList.length === 0) {
     return <p>Loading...</p>;
   }
@@ -44,12 +36,11 @@ function Story() {
         </Button>
       ))}
       {openModalInfo && (
-        <Modal
-          title={openModalInfo.title}
-          content={openModalInfo.description}
-          onClick={handleModalClick}
-          onClose={() => setOpenModalInfo(null)}
-        />
+        <Modal onClose={() => setOpenModalInfo(null)}>
+          <div>
+            <h2>Story</h2>
+          </div>
+        </Modal>
       )}
     </div>
   );
