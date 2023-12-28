@@ -6,10 +6,11 @@ import Modal from "component/Modal";
 import { RandomStory } from "api/story/route";
 import Image from "next/image";
 import styles from "./Story.module.css";
+import { useModalContext } from "app/context/ModalContext/Provider";
 
 function Story() {
   const [storyList, setStoryList] = useState<RandomStory[]>([]);
-  const [openModalInfo, setOpenModalInfo] = useState<RandomStory | null>(null);
+  const { isOpen, openModal } = useModalContext();
 
   useEffect(() => {
     getData<RandomStory>("/api/story", 10).then((v) => {
@@ -17,7 +18,7 @@ function Story() {
     });
   }, []);
   const handleClick = (modalContent: RandomStory) => {
-    setOpenModalInfo(modalContent);
+    openModal(modalContent);
   };
 
   if (storyList.length === 0) {
@@ -35,8 +36,8 @@ function Story() {
           <Image src={avatar} fill alt={firstName} />
         </Button>
       ))}
-      {openModalInfo && (
-        <Modal onClose={() => setOpenModalInfo(null)}>
+      {isOpen && (
+        <Modal>
           <div>
             <h2>Story</h2>
           </div>

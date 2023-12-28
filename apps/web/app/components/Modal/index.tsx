@@ -1,11 +1,11 @@
 import React, { MouseEvent, ReactNode } from "react";
 import { Button } from "@repo/ui/src/button";
 import styles from "./Modal.module.css";
+import { useModalContext } from "app/context/ModalContext/Provider";
 
 export interface Props {
   children: ReactNode;
   useCloseBtn?: boolean;
-  onClose: () => void;
 }
 type StandardizedModalType = {
   id: string;
@@ -21,12 +21,11 @@ type StandardizedModalType = {
   onClose: () => void;
 };
 
-function Modal({ children, onClose, useCloseBtn = true }: Props) {
-  const handleClose = () => {
-    onClose();
-  };
+function Modal({ children, useCloseBtn = true }: Props) {
+  const { closeModal } = useModalContext();
+
   const dimmedClickHander = (e: MouseEvent<HTMLDivElement>) => {
-    if (e.currentTarget === e.target) handleClose();
+    if (e.currentTarget === e.target) closeModal();
   };
 
   return (
@@ -34,7 +33,7 @@ function Modal({ children, onClose, useCloseBtn = true }: Props) {
       <div className={styles.modal_content}>
         {useCloseBtn && (
           <div className={styles.closeBtn}>
-            <Button onClick={handleClose}>X</Button>
+            <Button onClick={closeModal}>X</Button>
           </div>
         )}
         {children}
