@@ -1,4 +1,4 @@
-import React, { MouseEvent, ReactNode } from "react";
+import React, { MouseEvent, ReactNode, useEffect } from "react";
 import { Button } from "@repo/ui/src/button";
 import styles from "./Modal.module.css";
 import { useModalContext } from "app/context/ModalContext/Provider";
@@ -27,6 +27,15 @@ function Modal({ children, useCloseBtn = true }: Props) {
   const dimmedClickHander = (e: MouseEvent<HTMLDivElement>) => {
     if (e.currentTarget === e.target) closeModal();
   };
+  useEffect(() => {
+    const styleSheet = document.body.style;
+    styleSheet.setProperty("overflow", "hidden");
+    styleSheet.setProperty("height", "100vh");
+    return () => {
+      styleSheet.removeProperty("overflow");
+      styleSheet.removeProperty("height");
+    };
+  }, []);
 
   return (
     <div className={styles.modal_overlay} onClick={dimmedClickHander}>

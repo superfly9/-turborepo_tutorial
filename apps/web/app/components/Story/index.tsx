@@ -11,7 +11,6 @@ import { useModalContext } from "app/context/ModalContext/Provider";
 function Story() {
   const [storyList, setStoryList] = useState<RandomStory[]>([]);
   const { isOpen, openModal } = useModalContext();
-
   useEffect(() => {
     getData<RandomStory>("/api/story", 10).then((v) => {
       setStoryList([...v]);

@@ -1,6 +1,12 @@
 "use client";
 
-import React, { useContext, useMemo, useState, ReactNode } from "react";
+import React, {
+  useContext,
+  useMemo,
+  useState,
+  useCallback,
+  ReactNode,
+} from "react";
 
 interface Props {
   children: ReactNode;
@@ -15,21 +21,23 @@ export const ModalContext = React.createContext({
 function ModalProvider({ children }: Props): ReactNode {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [modalInfo, setModalInfo] = useState<any>(undefined);
-  const openModal = (modalInfo: any) => {
+  const openModal = useCallback((modalInfo: any) => {
     setIsOpen(true);
     setModalInfo(modalInfo);
-  };
-  const closeModal = () => setIsOpen(false);
+  }, []);
 
-  const value = useMemo(
-    () => ({
+  const closeModal = useCallback(() => {
+    setIsOpen(false);
+    setModalInfo(null);
+  }, []);
+  const value = useMemo(() => {
+    return {
       isOpen,
       modalInfo,
       openModal,
       closeModal,
-    }),
-    [isOpen, modalInfo, openModal, closeModal]
-  );
+    };
+  }, [isOpen, modalInfo, openModal, closeModal]);
 
   return (
     <ModalContext.Provider value={value}>
