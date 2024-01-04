@@ -10,6 +10,7 @@ import { useModalContext } from "app/context/ModalContext/Provider";
 
 function Story() {
   const [storyList, setStoryList] = useState<RandomStory[]>([]);
+  const [currentStoryIdx, setCurrentStoryIdx] = useState<number>(0);
   const { isOpen, openModal } = useModalContext();
   useEffect(() => {
     getData<RandomStory>("/api/story", 10).then((v) => {
@@ -24,22 +25,44 @@ function Story() {
     return <p>Loading...</p>;
   }
 
+  const handleStoryDivider = (idx: number) => {
+    setCurrentStoryIdx(idx);
+  };
+
   return (
     <div className={styles.wrapper}>
-      {storyList.map(({ avatar, _id, firstName, ...rest }) => (
-        <Button
-          className={styles.story_profile}
-          onClick={() => handleClick({ avatar, _id, firstName, ...rest })}
-          key={_id}
-        >
-          <Image src={avatar} fill alt={firstName} />
-        </Button>
-      ))}
+      {storyList.map(({ avatar, _id, firstName, ...rest }, index) => {
+        const isFirst = index === 0;
+        return (
+          <div className={styles.story}>
+            <Button
+              className={styles.story_profile}
+              onClick={() => handleClick({ avatar, _id, firstName, ...rest })}
+              key={_id}
+            >
+              <Image src={avatar} width={62} height={62} alt={firstName} />
+            </Button>
+            <span className={styles.name}>
+              {isFirst ? "Your Story" : firstName}
+            </span>
+          </div>
+        );
+      })}
       {isOpen && (
         <Modal>
-          <div>
-            <h2>Story</h2>
-          </div>
+          {storyList.map(({ firstName, avatar }, index) => (
+            <div className={styles.content_wrapper}>
+              <div key={`${firstName}-${index}`} className={styles.divider} />
+              <div
+                className={`${styles.content} ${
+                  currentStoryIdx === index ? styles.active : ""
+                }`}
+                onClick={() => handleStoryDivider(index)}
+              >
+                <Image src={avatar} alt={firstName} fill />
+              </div>
+            </div>
+          ))}
         </Modal>
       )}
     </div>

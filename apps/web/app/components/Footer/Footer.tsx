@@ -11,30 +11,30 @@ function Footer() {
         src={home}
         className={`${styles.pointer} ${styles.camera}`}
         alt="홈이동 버튼"
-        width={40}
-        height={40}
+        width={30}
+        height={30}
       />
-      <Image src={search} alt="검색 버튼" width={40} height={40} />
+      <Image src={search} alt="검색 버튼" width={30} height={30} />
       <Image
         src={upload}
         className={`${styles.pointer} ${styles.dm}`}
         alt="게시물 업로드 버튼"
-        width={40}
-        height={40}
+        width={30}
+        height={30}
       />
       <Image
         src={like}
         className={`${styles.pointer} ${styles.dm}`}
         alt="좋아요 버튼"
-        width={40}
-        height={40}
+        width={30}
+        height={30}
       />
       <Image
         src={profile}
         className={`${styles.pointer} ${styles.dm}`}
         alt="프로필 버튼"
-        width={40}
-        height={40}
+        width={30}
+        height={30}
       />
     </div>
   );

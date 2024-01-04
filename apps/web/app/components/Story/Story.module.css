@@ -3,14 +3,44 @@
   margin-top: 70px;
   padding-top: 15px;
   column-gap: 10px;
+  overflow-x: scroll;
+  margin-bottom: 20px;
+}
+.story {
+  width: 62px;
 }
 .story_profile {
   position: relative;
-  width: 50px;
-  height: 50px;
   overflow: hidden;
   cursor: pointer;
   border: 2px solid #fbaa47;
   border-radius: 50%;
-  padding: 2px;
+}
+.name {
+  display: block;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.content_wrapper {
+  position: relative;
+  display: flex;
+  width: 50vw;
+  height: 100%;
+}
+.divider {
+  width: 5px;
+  height: 2px;
+  background-color: blanchedalmond;
+}
+.content {
+  display: none;
+  position: relative;
+  margin-top: 40px;
+  min-width: 100%;
+  height: 70%;
+}
+
+.content.active {
+  display: block;
 }

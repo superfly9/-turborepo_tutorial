@@ -41,9 +41,9 @@ function Modal({ children, useCloseBtn = true }: Props) {
     <div className={styles.modal_overlay} onClick={dimmedClickHander}>
       <div className={styles.modal_content}>
         {useCloseBtn && (
-          <div className={styles.closeBtn}>
-            <Button onClick={closeModal}>X</Button>
-          </div>
+          <Button className={styles.closeBtn} onClick={closeModal}>
+            X
+          </Button>
         )}
         {children}
       </div>
