@@ -1,6 +1,8 @@
 .wrapper {
   display: flex;
-  gap: 10px;
+  margin-top: 70px;
+  padding-top: 15px;
+  column-gap: 10px;
 }
 .story_profile {
   position: relative;
