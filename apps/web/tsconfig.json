@@ -1,5 +1,8 @@
 {
   "extends": "@repo/typescript-config/nextjs.json",
+  "moduleResolution": [
+    "node"
+  ],
   "compilerOptions": {
     "paths": {
       "app/*": [
