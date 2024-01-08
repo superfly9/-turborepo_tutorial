@@ -29,16 +29,16 @@
 .content_wrapper.active {
   display: flex;
 }
-.divider {
+.tab {
   margin-right: 10px;
-  height: 7px;
+  height: 15px;
   position: absolute;
   top: 0;
+  list-style: none;
   background-color: #c7c7cc;
 }
 .content {
   display: block;
   position: relative;
-  margin-top: -15px;
   min-width: 100%;
 }

@@ -54,16 +54,19 @@ function Story() {
       {isOpen && (
         <Modal>
           <>
-            {storyList.map((_, idx) => (
-              <div
-                key={`divider-${idx}`}
-                style={{
-                  width: `calc(50vw /${storyList.length} - 3px)`,
-                  left: `calc((50vw /${storyList.length}) * ${idx})`,
-                }}
-                className={styles.divider}
-              />
-            ))}
+            <ul>
+              {storyList.map((_, idx) => (
+                <li
+                  onClick={() => setCurrentStoryIdx(idx)}
+                  key={`tab-${idx}`}
+                  style={{
+                    width: `calc(50vw /${storyList.length} - 3px)`,
+                    left: `calc((50vw /${storyList.length}) * ${idx})`,
+                  }}
+                  className={styles.tab}
+                />
+              ))}
+            </ul>
             {storyList.map(({ firstName, avatar }, index) => (
               <div
                 className={`${styles.content_wrapper}  ${
