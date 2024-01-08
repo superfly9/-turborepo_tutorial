@@ -21,9 +21,9 @@ export const ModalContext = React.createContext({
 function ModalProvider({ children }: Props) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [modalInfo, setModalInfo] = useState<any>(undefined);
-  const openModal = useCallback((modalInfo: any) => {
+  const openModal = useCallback((param: any) => {
     setIsOpen(true);
-    setModalInfo(modalInfo);
+    setModalInfo({ ...param });
   }, []);
 
   const closeModal = useCallback(() => {

@@ -8,9 +8,10 @@
   z-index: 9999;
 }
 .modal_content {
-  width: 50%;
-  height: 50%;
+  width: 50vw;
+  height: 50vh;
   position: absolute;
+  padding-top: 20px;
   top: 50%;
   left: 50%;
   cursor: pointer;
@@ -20,12 +21,15 @@
 
 .closeBtn {
   position: absolute;
-  top: 0;
+  top: 25px;
   right: 0;
-  width: 20px;
-  height: 20px;
+  box-sizing: border-box;
+  z-index: 10;
+  border-radius: 50%;
+  background-color: rgba(128, 128, 128, 0.5);
+  width: 40px;
+  height: 40px;
   padding: 10px;
   border: none;
-  background-color: transparent;
   font-size: 20px;
 }

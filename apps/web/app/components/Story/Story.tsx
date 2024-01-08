@@ -17,8 +17,9 @@ function Story() {
       setStoryList([...v]);
     });
   }, []);
-  const handleClick = (modalContent: RandomStory) => {
+  const handleClick = (modalContent: RandomStory, idx: number) => {
     openModal(modalContent);
+    setCurrentStoryIdx(idx);
   };
 
   if (storyList.length === 0) {
@@ -37,7 +38,9 @@ function Story() {
           <div className={styles.story}>
             <Button
               className={styles.story_profile}
-              onClick={() => handleClick({ avatar, _id, firstName, ...rest })}
+              onClick={() =>
+                handleClick({ avatar, _id, firstName, ...rest }, index)
+              }
               key={_id}
             >
               <Image src={avatar} width={62} height={62} alt={firstName} />
@@ -50,19 +53,32 @@ function Story() {
       })}
       {isOpen && (
         <Modal>
-          {storyList.map(({ firstName, avatar }, index) => (
-            <div className={styles.content_wrapper}>
-              <div key={`${firstName}-${index}`} className={styles.divider} />
+          <>
+            {storyList.map((_, idx) => (
               <div
-                className={`${styles.content} ${
+                key={`divider-${idx}`}
+                style={{
+                  width: `calc(50vw /${storyList.length} - 3px)`,
+                  left: `calc((50vw /${storyList.length}) * ${idx})`,
+                }}
+                className={styles.divider}
+              />
+            ))}
+            {storyList.map(({ firstName, avatar }, index) => (
+              <div
+                className={`${styles.content_wrapper}  ${
                   currentStoryIdx === index ? styles.active : ""
                 }`}
-                onClick={() => handleStoryDivider(index)}
               >
-                <Image src={avatar} alt={firstName} fill />
+                <div
+                  className={styles.content}
+                  onClick={() => handleStoryDivider(index)}
+                >
+                  <Image src={avatar} alt={firstName} fill />
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </>
         </Modal>
       )}
     </div>
