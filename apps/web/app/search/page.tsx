@@ -1,7 +1,13 @@
-import React from "react";
+"use client";
+
+import Input from "../../components/Input";
 
 function Search() {
-  return <div>Search</div>;
+  return (
+    <>
+      <Input />
+    </>
+  );
 }
 
 export default Search;
