@@ -1,11 +1,10 @@
 "use client";
-
-import Input from "../../components/Input";
+import SearchInput from "components/Input";
 
 function Search() {
   return (
     <>
-      <Input />
+      <SearchInput />
     </>
   );
 }

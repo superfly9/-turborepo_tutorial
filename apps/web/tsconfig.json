@@ -1,18 +1,22 @@
 {
   "extends": "@repo/typescript-config/nextjs.json",
-  "moduleResolution": [
-    "node"
-  ],
   "compilerOptions": {
+    "baseUrl": "./",
     "paths": {
       "app/*": [
-        "./app/*"
+        "app/*"
       ],
-      "component/*": [
-        "./app/components/*"
+      "components/*": [
+        "components/*"
       ],
       "api/*": [
-        "./app/api/*"
+        "app/api/*"
+      ],
+      "public/*": [
+        "public/*"
+      ],
+      "@/*": [
+        "./*"
       ]
     },
     "plugins": [

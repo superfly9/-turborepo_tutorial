@@ -4343,6 +4343,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "my-turborepo@workspace:."
   dependencies:
+    "@ant-design/icons": ^5.2.6
     "@faker-js/faker": ^8.3.1
     "@repo/eslint-config": "*"
     "@repo/typescript-config": "*"

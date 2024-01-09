@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { getData } from "app/util/fetch";
 import { Button } from "@repo/ui/src/button";
-import Modal from "component/Modal";
+import Modal from "components/Modal";
 import { RandomStory } from "api/story/route";
 import Image from "next/image";
 import styles from "./Story.module.css";

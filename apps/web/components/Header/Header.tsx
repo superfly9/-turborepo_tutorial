@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import React from "react";
-import { camera, companyLogo, dm } from "../../public";
+import { camera, companyLogo, dm } from "public";
 import styles from "./Header.module.css";
 
 function Header() {

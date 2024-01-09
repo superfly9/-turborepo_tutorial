@@ -2,8 +2,9 @@
 
 import React, { useState } from "react";
 import { Input } from "antd";
+import { SearchOutlined } from "@ant-design/icons";
 
-function InputComponent() {
+function SearchInput() {
   const [term, setTerm] = useState<string>("");
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTerm(e.target.value);
@@ -11,6 +12,7 @@ function InputComponent() {
   return (
     <>
       <Input
+        prefix={<SearchOutlined />}
         value={term}
         onChange={handleChange}
         size="large"
@@ -20,4 +22,4 @@ function InputComponent() {
   );
 }
 
-export default InputComponent;
+export default SearchInput;

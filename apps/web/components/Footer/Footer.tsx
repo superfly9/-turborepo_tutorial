@@ -1,10 +1,12 @@
 "use client";
 import Image from "next/image";
 import React from "react";
-import { like, home, search, upload, profile } from "app/public";
+import { like, home, search, upload, profile } from "public";
+import { useRouter } from "next/navigation";
 import styles from "./Footer.module.css";
 
 function Footer() {
+  const router = useRouter();
   return (
     <div className={styles.wrapper}>
       <Image
@@ -14,7 +16,9 @@ function Footer() {
         width={30}
         height={30}
       />
-      <Image src={search} alt="검색 버튼" width={30} height={30} />
+      <button className={styles.btn} onClick={() => router.push("./search")}>
+        <Image src={search} alt="검색 버튼" width={30} height={30} />
+      </button>
       <Image
         src={upload}
         className={`${styles.pointer} ${styles.dm}`}

@@ -1,5 +1,5 @@
-import Feed from "component/Feed";
-import Story from "component/Story";
+import Feed from "components/Feed";
+import Story from "components/Story";
 import styles from "./page.module.css";
 import ModalProvider from "../context/ModalContext/Provider";
 
