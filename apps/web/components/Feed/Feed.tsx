@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { getData } from "app/util/fetch";
-import { RandomUser } from "app/api/user/route";
+import { RandomUser } from "app/(home)/user/route";
 import Image from "next/image";
 import styles from "./Feed.module.css";
 

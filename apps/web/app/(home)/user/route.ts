@@ -29,4 +29,4 @@ function createRandomUser() {
 export async function GET() {
     const res = faker.helpers.multiple(createRandomUser, { count: 10 })
     return NextResponse.json(res)
-}
+}8

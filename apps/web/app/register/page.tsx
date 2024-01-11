@@ -3,6 +3,7 @@ import React, { CSSProperties } from "react";
 import { Input, Button, Flex, Layout } from "antd";
 import Image from "next/image";
 import { LeftOutlined } from "@ant-design/icons";
+import { useRouter } from "next/navigation";
 
 const layoutStyle: CSSProperties = {
   borderRadius: 8,
@@ -34,10 +35,18 @@ const logoStyle: CSSProperties = {
 
 function Register() {
   const { Header } = Layout;
+  const router = useRouter();
+  const handleClick = () => {
+    router.back();
+  };
   return (
     <Layout style={layoutStyle}>
       <Header style={headerStyle}>
-        <Button icon={<LeftOutlined />} style={prevBtnStyle} />
+        <Button
+          icon={<LeftOutlined />}
+          style={prevBtnStyle}
+          onClick={handleClick}
+        />
       </Header>
       <Image
         src="/images/company_logo.png"
