@@ -13,7 +13,7 @@ function Story() {
   const [currentStoryIdx, setCurrentStoryIdx] = useState<number>(0);
   const { isOpen, openModal } = useModalContext();
   useEffect(() => {
-    getData<RandomStory>("/api/story", 10).then((v) => {
+    getData<RandomStory>("/story", 10).then((v) => {
       setStoryList([...v]);
     });
   }, []);

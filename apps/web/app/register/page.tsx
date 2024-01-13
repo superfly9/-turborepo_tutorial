@@ -39,6 +39,9 @@ function Register() {
   const handleClick = () => {
     router.back();
   };
+  const loginGoogle = async () => {
+    await fetch("/auth/callback/google", { method: "POST" });
+  };
   return (
     <Layout style={layoutStyle}>
       <Header style={headerStyle}>
@@ -60,6 +63,9 @@ function Register() {
         <Input placeholder="Password" />
         <Button style={{ width: "100%" }} type="primary">
           Log in
+        </Button>
+        <Button style={{ width: "100%" }} type="primary" onClick={loginGoogle}>
+          Log in With Google
         </Button>
       </Flex>
     </Layout>

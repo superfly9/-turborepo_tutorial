@@ -1,5 +1,6 @@
 import NextAuth from "next-auth"
 import GoogleProvider from "next-auth/providers/google"
+import { NextRequest, NextResponse } from "next/server";
 
 export const authOptions = {
   providers : [
@@ -10,4 +11,9 @@ export const authOptions = {
   ]
 }
 
-export default NextAuth(authOptions);
+export const POST =(request:NextRequest)=> {
+  console.log(request)
+  return NextResponse.json({code:'SUCCESS'})
+}
+
+NextAuth(authOptions);

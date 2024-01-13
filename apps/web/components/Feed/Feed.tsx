@@ -15,7 +15,7 @@ function Feed() {
     if (target?.current) {
       observer = new IntersectionObserver(async ([entry]) => {
         if (entry?.isIntersecting) {
-          const newList = await getData<RandomUser>("/api/user", 10);
+          const newList = await getData<RandomUser>("/user", 10);
           setList((v) => [...v, ...newList]);
         }
       });
