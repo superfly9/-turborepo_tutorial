@@ -2,23 +2,24 @@
 import Image from "next/image";
 import React from "react";
 import { like, home, search, upload, profile } from "public";
-import { useRouter } from "next/navigation";
 import styles from "./Footer.module.css";
+import Link from "next/link";
 
 function Footer() {
-  const router = useRouter();
   return (
     <div className={styles.wrapper}>
-      <Image
-        src={home}
-        className={`${styles.pointer} ${styles.camera}`}
-        alt="홈이동 버튼"
-        width={30}
-        height={30}
-      />
-      <button className={styles.btn} onClick={() => router.push("./search")}>
+      <Link href="/">
+        <Image
+          src={home}
+          className={`${styles.pointer} ${styles.camera}`}
+          alt="홈이동 버튼"
+          width={30}
+          height={30}
+        />
+      </Link>
+      <Link href="/search">
         <Image src={search} alt="검색 버튼" width={30} height={30} />
-      </button>
+      </Link>
       <Image
         src={upload}
         className={`${styles.pointer} ${styles.dm}`}
