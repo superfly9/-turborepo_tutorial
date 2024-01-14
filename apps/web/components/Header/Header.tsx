@@ -14,7 +14,13 @@ function Header() {
         width={30}
         height={30}
       />
-      <Image src={companyLogo} alt="인스타그램 회사" width={130} height={30} />
+      <Image
+        src={companyLogo}
+        priority
+        alt="인스타그램 회사"
+        width={130}
+        height={30}
+      />
       <Image
         src={dm}
         className={`${styles.pointer} ${styles.dm}`}

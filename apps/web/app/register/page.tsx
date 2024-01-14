@@ -40,7 +40,7 @@ function Register() {
     router.back();
   };
   const loginGoogle = async () => {
-    await fetch("/auth/callback/google", { method: "POST" });
+    await fetch("/api/auth/signin/google");
   };
   return (
     <Layout style={layoutStyle}>

@@ -35,7 +35,7 @@ function Story() {
       {storyList.map(({ avatar, _id, firstName, ...rest }, index) => {
         const isFirst = index === 0;
         return (
-          <div className={styles.story}>
+          <div className={styles.story} key={_id}>
             <Button
               className={styles.story_profile}
               onClick={() =>
