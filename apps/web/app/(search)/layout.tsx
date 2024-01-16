@@ -21,7 +21,11 @@ export default function RootLayout({
     <>
       <AntdRegistry>
         <SessionProvider>
-          <div className="layout_container">{children}</div>
+          <html>
+            <body>
+              <div className="layout_container">{children}</div>
+            </body>
+          </html>
         </SessionProvider>
       </AntdRegistry>
       <Footer />

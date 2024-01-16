@@ -1,4 +1,3 @@
-"use client";
 import SearchInput from "components/Input";
 
 function Search() {

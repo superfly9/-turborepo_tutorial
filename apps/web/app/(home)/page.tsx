@@ -1,7 +1,7 @@
 import Feed from "components/Feed";
 import Story from "components/Story";
 import styles from "./page.module.css";
-import ModalProvider from "../context/ModalContext/Provider";
+import ModalProvider from "../../context/ModalContext/Provider";
 import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
 import { authOptions } from "app/api/auth/[...nextauth]/options";

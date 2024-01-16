@@ -6,7 +6,7 @@ import Modal from "components/Modal";
 import { RandomStory } from "app/(home)/story/route";
 import Image from "next/image";
 import styles from "./Story.module.css";
-import { useModalContext } from "app/context/ModalContext/Provider";
+import { useModalContext } from "@/context/ModalContext/Provider";
 
 function Story() {
   const [storyList, setStoryList] = useState<RandomStory[]>([]);

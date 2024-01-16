@@ -1,7 +1,7 @@
 import React, { MouseEvent, ReactNode, useEffect } from "react";
 import { Button } from "@repo/ui/src/button";
 import styles from "./Modal.module.css";
-import { useModalContext } from "app/context/ModalContext/Provider";
+import { useModalContext } from "@/context/ModalContext/Provider";
 
 export interface Props {
   children: ReactNode;
