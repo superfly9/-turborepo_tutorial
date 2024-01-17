@@ -19,16 +19,16 @@ export default function RootLayout({
 }): JSX.Element {
   return (
     <>
-      <AntdRegistry>
-        <SessionProvider>
-          <html>
-            <body>
+      <html>
+        <body>
+          <AntdRegistry>
+            <SessionProvider>
               <div className="layout_container">{children}</div>
-            </body>
-          </html>
-        </SessionProvider>
-      </AntdRegistry>
-      <Footer />
+            </SessionProvider>
+            <Footer />
+          </AntdRegistry>
+        </body>
+      </html>
     </>
   );
 }
