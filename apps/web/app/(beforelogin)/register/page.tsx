@@ -4,6 +4,7 @@ import { Input, Button, Flex, Layout } from "antd";
 import Image from "next/image";
 import { LeftOutlined } from "@ant-design/icons";
 import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
 
 const layoutStyle: CSSProperties = {
   borderRadius: 8,
@@ -40,7 +41,7 @@ function Register() {
     router.back();
   };
   const loginGoogle = async () => {
-    await fetch("/api/auth/signin/google");
+    signIn("google", { callbackUrl: "/" });
   };
   return (
     <Layout style={layoutStyle}>

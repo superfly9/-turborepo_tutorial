@@ -18,6 +18,6 @@ function createRandomImage(option:ImageOption) {
 export type SearchTabImage = ReturnType<typeof createRandomImage>
 
 export async function GET () {
-    const res = faker.helpers.multiple(()=>createRandomImage({category:'animal' }), { count: 30 })
+    const res = faker.helpers.multiple(()=>createRandomImage({category:'dog' }), { count: 30 })
     return NextResponse.json(res)
 }

@@ -21,7 +21,7 @@ function Search() {
       observer = new IntersectionObserver(async ([entry]) => {
         if (entry?.isIntersecting) {
           const newImage = await getImage();
-          setImage([image, ...newImage]);
+          setImage((v) => [...v, ...newImage]);
         }
       });
       observer?.observe(target?.current);
@@ -35,7 +35,12 @@ function Search() {
       <div className={styles.container}>
         {image.map(({ url, _id }) => (
           <div key={_id} className={styles.imgContainer}>
-            <Image src={url} fill alt={`image_${_id}`} />
+            <Image
+              src={url}
+              fill
+              alt={`image_${_id}`}
+              sizes="(max-width: 768px) 33vw, (max-width: 1200px) 20vw"
+            />
           </div>
         ))}
       </div>
