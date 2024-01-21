@@ -22,10 +22,6 @@ function Story() {
     setCurrentStoryIdx(idx);
   };
 
-  if (storyList.length === 0) {
-    return <p>Loading...</p>;
-  }
-
   const handleStoryDivider = (idx: number) => {
     setCurrentStoryIdx(idx);
   };
