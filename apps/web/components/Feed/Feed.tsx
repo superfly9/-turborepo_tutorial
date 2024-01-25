@@ -11,6 +11,12 @@ function Feed() {
   const target = useRef(null);
 
   useEffect(() => {
+    getData<RandomUser>("/user", 10).then((userList) => {
+      setList((v) => [...v, ...userList]);
+    });
+  },[]);
+
+  useEffect(() => {
     let observer: IntersectionObserver;
     if (target?.current) {
       observer = new IntersectionObserver(async ([entry]) => {
