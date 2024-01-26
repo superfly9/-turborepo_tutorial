@@ -8,8 +8,8 @@
   z-index: 9999;
 }
 .modal_content {
-  width: 50vw;
-  height: 50vh;
+  width: 100vw;
+  height: 100vh;
   position: absolute;
   padding-top: 20px;
   top: 50%;

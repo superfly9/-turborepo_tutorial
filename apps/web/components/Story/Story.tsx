@@ -56,8 +56,9 @@ function Story() {
                   onClick={() => setCurrentStoryIdx(idx)}
                   key={`tab-${idx}`}
                   style={{
-                    width: `calc(50vw /${storyList.length} - 3px)`,
-                    left: `calc((50vw /${storyList.length}) * ${idx})`,
+                    width: `calc(100vw /${storyList.length} - 3px)`,
+                    height: "2px",
+                    left: `calc((70vw /${storyList.length}) * ${idx})`,
                   }}
                   className={styles.tab}
                 />
