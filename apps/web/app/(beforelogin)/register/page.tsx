@@ -34,14 +34,17 @@ const logoStyle: CSSProperties = {
   margin: "0 auto",
 };
 
+type OauthPlatform = "google" | "github";
+
 function Register() {
   const { Header } = Layout;
   const router = useRouter();
   const handleClick = () => {
     router.back();
   };
-  const loginGoogle = async () => {
-    signIn("google", { callbackUrl: "/" });
+  const loginWithOauth = async (platform: OauthPlatform) => {
+    localStorage.setItem("login_platform", platform);
+    signIn(platform, { callbackUrl: "/" });
   };
   return (
     <Layout style={layoutStyle}>
@@ -65,8 +68,19 @@ function Register() {
         <Button style={{ width: "100%" }} type="primary">
           Log in
         </Button>
-        <Button style={{ width: "100%" }} type="primary" onClick={loginGoogle}>
+        <Button
+          style={{ width: "100%" }}
+          type="primary"
+          onClick={() => loginWithOauth("google")}
+        >
           Log in With Google
+        </Button>
+        <Button
+          style={{ width: "100%" }}
+          type="primary"
+          onClick={() => loginWithOauth("github")}
+        >
+          Log in With Github
         </Button>
       </Flex>
     </Layout>

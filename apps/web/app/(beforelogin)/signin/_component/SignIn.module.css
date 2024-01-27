@@ -1,0 +1,15 @@
+.google {
+  background-color: var(--google-provider-bg);
+  color: var(--google-provider-color);
+}
+.google:hover {
+  background-color: var(--google-provider-dark-bg-hover);
+}
+
+.github {
+  background-color: var(--github-provider-bg);
+  color: var(--github-provider-color);
+}
+.github:hover {
+  background-color: var(--github-provider-dark-bg-hover);
+}

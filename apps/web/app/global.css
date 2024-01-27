@@ -20,6 +20,26 @@
     #a853ba 180deg,
     #e92a67 360deg
   );
+  --border-width: 1px;
+  --border-radius: 0.5rem;
+  --color-error: #c94b4b;
+  --color-info: #157efb;
+  --color-info-hover: #0f6ddb;
+  --color-info-text: #fff;
+
+  --google-provider-bg: #fff;
+  --google-provider-dark-bg: #fff;
+  --google-provider-color: #000;
+  --google-provider-dark-color: #000;
+  --google-provider-bg-hover: rgba(255, 255, 255, 0.8);
+  --google-provider-dark-bg-hover: rgba(255, 255, 255, 0.8);
+
+  --github-provider-bg: #24292f;
+  --github-provider-dark-bg: #24292f;
+  --github-provider-color: #fff;
+  --github-provider-dark-color: #fff;
+  --github-provider-bg-hover: rgba(36, 41, 47, 0.8);
+  --github-provider-dark-bg-hover: rgba(36, 41, 47, 0.8);
 }
 
 * {

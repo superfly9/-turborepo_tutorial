@@ -3,9 +3,6 @@ import GithubProvider from "next-auth/providers/github"
 import type { AuthOptions } from "next-auth"
 
 export const authOptions : AuthOptions = {
-    pages : {
-      signIn:'/signin'
-    },
     providers : [
       GoogleProvider({
         clientId : process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID as string,

@@ -13,8 +13,8 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const currentUser = await getCurrentUser();
-  if (!currentUser) {
-    redirect("/register");
+  if (currentUser) {
+    redirect("/");
   }
   return (
     <html lang="en">

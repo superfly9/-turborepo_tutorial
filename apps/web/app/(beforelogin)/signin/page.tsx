@@ -1,12 +1,10 @@
-import { getCurrentUser } from "@/util/session";
-import Link from "next/link";
+"use client";
+import SignIn from "./_component/SignIn";
 
-export default async function SignInPage() {
-  const user = await getCurrentUser();
+export default function SignInPage() {
   return (
     <>
-      Signed in as {user?.email} <br />
-      <Link href="/">Home</Link>
+      <SignIn />
     </>
   );
 }
