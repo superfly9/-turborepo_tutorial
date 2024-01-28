@@ -1,6 +1,6 @@
 import React from "react";
-import styles from "./loading.module.css";
+import Skeleton from "./search/_component/Skeleton";
 
 export default function Loading() {
-  return <div className={styles.container}>Loading...</div>;
+  return <Skeleton length={15} />;
 }

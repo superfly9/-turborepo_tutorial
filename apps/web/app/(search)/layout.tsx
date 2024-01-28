@@ -4,7 +4,6 @@ import { Inter } from "next/font/google";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import Footer from "components/Footer";
 import { SessionProvider } from "next-auth/react";
-import { Suspense } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,21 +21,7 @@ export default function RootLayout({
     <>
       <AntdRegistry>
         <SessionProvider>
-          <Suspense
-            fallback={
-              <div
-                style={{
-                  backgroundColor: "rebeccapurple",
-                  width: "100vw",
-                  height: "100vh",
-                }}
-              >
-                Loading
-              </div>
-            }
-          >
-            <div className="layout_container">{children}</div>
-          </Suspense>
+          <div className="layout_container">{children}</div>
         </SessionProvider>
         <Footer />
       </AntdRegistry>
