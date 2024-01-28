@@ -1,7 +1,9 @@
 import ListWithObserver from "./_component/ListWithObserver";
 
 const getImage = async () => {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN}/api/search`);
+  const response = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN}/api/search`, {
+    cache: "no-store",
+  });
   if (!response.ok) throw new Error("error");
   return response.json();
 };

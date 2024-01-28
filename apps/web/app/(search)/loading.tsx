@@ -1,6 +1,12 @@
 import React from "react";
-import Skeleton from "./search/_component/Skeleton";
+import SkeletonImage from "components/Skeleton/Image/SkeletonImage";
+import SkeletonInput from "components/Skeleton/Input/SkeletonInput";
 
 export default function Loading() {
-  return <Skeleton length={15} />;
+  return (
+    <>
+      <SkeletonInput size="max" />
+      <SkeletonImage length={15} />
+    </>
+  );
 }
