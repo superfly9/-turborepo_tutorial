@@ -4,6 +4,7 @@ import { getData } from "@/util/fetch";
 import { RandomUser } from "app/(home)/user/route";
 import Image from "next/image";
 import styles from "./Feed.module.css";
+import List from "components/List";
 
 function Feed() {
   const [list, setList] = useState<RandomUser[]>([]);
@@ -14,7 +15,7 @@ function Feed() {
     getData<RandomUser>("/user", 10).then((userList) => {
       setList((v) => [...v, ...userList]);
     });
-  },[]);
+  }, []);
 
   useEffect(() => {
     let observer: IntersectionObserver;
@@ -30,19 +31,24 @@ function Feed() {
     return () => observer?.disconnect();
   }, [target?.current]);
 
+  const renderFeed = (item: RandomUser) => {
+    const { avatar, firstName, lastName, description } = item;
+    return (
+      <>
+        <Image
+          src={avatar}
+          alt={`${firstName}${lastName}_profile`}
+          width={50}
+          height={50}
+        />
+        {description}
+      </>
+    );
+  };
+
   return (
     <div className={styles.wrapper}>
-      {list.map(({ _id, avatar, description, firstName, lastName }) => (
-        <li style={{ display: "block", height: "20vh" }} key={_id}>
-          <Image
-            src={avatar}
-            alt={`${firstName}${lastName}_profile`}
-            width={50}
-            height={50}
-          />
-          {description}
-        </li>
-      ))}
+      <List items={list} renderItem={renderFeed} />
       <div ref={target} />
     </div>
   );

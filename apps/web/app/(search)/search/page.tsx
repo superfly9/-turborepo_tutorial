@@ -1,6 +1,7 @@
 import ListWithObserver from "./_component/ListWithObserver";
+import { SearchTabImage } from "app/api/search/route";
 
-const getImage = async () => {
+const getImage = async <T,>(): Promise<T> => {
   const response = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN}/api/search`, {
     cache: "no-store",
   });
@@ -9,11 +10,11 @@ const getImage = async () => {
 };
 
 async function Search() {
-  const images = await getImage();
+  const images = await getImage<SearchTabImage[]>();
 
   return (
     <>
-      <ListWithObserver initailImages={images} />
+      <ListWithObserver fetchCallback={getImage} initialList={images} />
     </>
   );
 }
