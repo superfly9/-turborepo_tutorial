@@ -1,14 +1,16 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import styles from "./SkeletonImage.module.css";
 
 interface Props {
-  length: number;
+  length?: number;
+  gridRepeat?: 1 | 2 | 3 | 4 | 5;
 }
 
-function SkeletonImage({ length }: Props) {
-  const count = length;
+function SkeletonImage({ length, gridRepeat }: Props) {
+  const count = length || 1;
+  const repeat = gridRepeat || 1;
   return (
-    <div className={styles.container}>
+    <div className={`${styles.container} grid_${styles[repeat]}`}>
       {Array(count)
         .fill(true)
         .map((_, idx) => (
@@ -18,4 +20,4 @@ function SkeletonImage({ length }: Props) {
   );
 }
 
-export default SkeletonImage;
+export default forwardRef(SkeletonImage);

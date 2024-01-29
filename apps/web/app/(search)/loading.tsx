@@ -6,7 +6,7 @@ export default function Loading() {
   return (
     <>
       <SkeletonInput size="max" />
-      <SkeletonImage length={15} />
+      <SkeletonImage length={15} gridRepeat={3} />
     </>
   );
 }

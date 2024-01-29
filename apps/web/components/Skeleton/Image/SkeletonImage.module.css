@@ -1,11 +1,23 @@
 .container {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
   grid-gap: 5px;
   gap: 5px;
-  margin-top: 10px;
 }
+.grid_2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+.grid_3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+.grid_4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+.grid_5 {
+  grid-template-columns: repeat(5, 1fr);
+}
+
 .skeleton {
+  height: 100%;
   aspect-ratio: 1/1;
   animation: skeleton linear 1s infinite alternate;
 }
