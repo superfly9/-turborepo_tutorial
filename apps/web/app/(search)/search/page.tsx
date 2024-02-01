@@ -1,7 +1,9 @@
 import ListWithObserver from "./_component/ListWithObserver";
 import { SearchTabImage } from "app/api/search/route";
+import SearchInput from "components/Input/SearchInput";
 
 const getImage = async <T,>(): Promise<T> => {
+  "use server";
   const response = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN}/api/search`, {
     cache: "no-store",
   });
@@ -14,7 +16,17 @@ async function Search() {
 
   return (
     <>
-      <ListWithObserver fetchCallback={getImage} initialList={images} />
+      <SearchInput />
+      <ListWithObserver
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(3, 1fr)",
+          gap: "5px",
+          marginTop: "10px",
+        }}
+        fetchCallback={getImage}
+        initialList={images}
+      />
     </>
   );
 }

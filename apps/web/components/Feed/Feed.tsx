@@ -5,6 +5,7 @@ import { RandomUser } from "app/(home)/user/route";
 import Image from "next/image";
 import styles from "./Feed.module.css";
 import List from "components/List";
+import { like, upload, profile } from "public";
 
 function Feed() {
   const [list, setList] = useState<RandomUser[]>([]);
@@ -35,20 +36,28 @@ function Feed() {
     const { avatar, firstName, lastName, description } = item;
     return (
       <>
-        <Image
-          src={avatar}
-          alt={`${firstName}${lastName}_profile`}
-          width={50}
-          height={50}
-        />
-        {description}
+        <div className={styles.img_container}>
+          <Image src={avatar} alt={`${firstName}${lastName}_profile`} fill />
+        </div>
+        <div>
+          <Image src={upload} alt="게시물" width={30} height={30} />
+          <Image src={like} alt="좋아요" width={30} height={30} />
+          <Image src={profile} alt="프로필" width={30} height={30} />
+        </div>
+        <p style={{ position: "relative" }}>{description}</p>
       </>
     );
   };
 
   return (
     <div className={styles.wrapper}>
-      <List items={list} renderItem={renderFeed} />
+      <List
+        items={list}
+        renderItem={renderFeed}
+        itemStyle={{
+          aspectRatio: "1",
+        }}
+      />
       <div ref={target} />
     </div>
   );

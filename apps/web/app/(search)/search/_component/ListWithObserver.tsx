@@ -2,7 +2,7 @@
 import { SearchTabImage } from "app/api/search/route";
 import SearchInput from "components/Input";
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { CSSProperties, useEffect, useRef, useState } from "react";
 import styles from "./ListWithObserver.module.css";
 import SkeletonImage from "components/Skeleton/Image/SkeletonImage";
 import List from "components/List";
@@ -14,9 +14,16 @@ interface fetchCallback<T> {
 interface Props {
   initialList: any[];
   fetchCallback: fetchCallback<any>;
+  containerStyle?: CSSProperties;
+  style?: CSSProperties;
 }
 
-function ListWithObserver({ initialList, fetchCallback }: Props) {
+function ListWithObserver({
+  initialList,
+  fetchCallback,
+  containerStyle,
+  style,
+}: Props) {
   const [list, setList] = useState<SearchTabImage[]>(initialList);
   const target = useRef(null);
   const imageRef = useRef<HTMLDivElement[]>([]);
@@ -42,7 +49,6 @@ function ListWithObserver({ initialList, fetchCallback }: Props) {
         <Image
           src={url}
           onLoad={() => {
-            console.log(imageRef.current);
             imageRef.current[index]?.remove();
           }}
           fill
@@ -58,9 +64,8 @@ function ListWithObserver({ initialList, fetchCallback }: Props) {
 
   return (
     <>
-      <SearchInput />
-      <div className={styles.container}>
-        <List items={list} renderItem={renderImage} />
+      <div style={containerStyle}>
+        <List items={list} renderItem={renderImage} style={style} />
       </div>
       <div ref={target} />
     </>

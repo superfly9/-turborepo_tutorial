@@ -7,19 +7,22 @@
   margin-bottom: 20px;
 }
 .story {
-  width: 62px;
+  text-align: center;
 }
 .story_profile {
   position: relative;
   overflow: hidden;
+  width: 62px;
   cursor: pointer;
   border: 2px solid #fbaa47;
   border-radius: 50%;
+  aspect-ratio: 1;
 }
 .name {
   display: block;
   text-overflow: ellipsis;
   overflow: hidden;
+  white-space: nowrap;
 }
 
 .content_wrapper {

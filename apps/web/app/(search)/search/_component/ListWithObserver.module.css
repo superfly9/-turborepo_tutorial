@@ -1,9 +1,3 @@
-.container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 5px;
-  margin-top: 10px;
-}
 .imgContainer {
   position: relative;
   aspect-ratio: 1/1;
