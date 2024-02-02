@@ -1,7 +1,36 @@
-.wrapper {
-  margin-top: 20px;
-}
 .img_container {
   position: relative;
   height: 100%;
+}
+.btn {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+.left_btn {
+  flex: 1;
+  display: flex;
+  column-gap: 8px;
+}
+.profile {
+  display: inline-block;
+  margin-top: 10px;
+  font-weight: 700;
+}
+.description {
+  font-weight: 500;
+  margin-top: 5px;
+}
+
+.additionalInfo {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  font-size: 13px;
+  row-gap: 5px;
+  color: rgb(115, 115, 115);
+}
+.postDate {
+  display: inline-block;
+  margin-bottom: 20px;
 }

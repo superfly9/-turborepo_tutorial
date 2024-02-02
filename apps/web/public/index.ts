@@ -7,5 +7,7 @@ import home from "./images/home.png";
 import profile from "./images/profile.png";
 import search from "./images/search.png";
 import upload from "./images/upload.png";
+import bookmark from "./images/bookmark.png";
+import comment from "./images/comment.png";
 
-export { icon, companyLogo, camera,dm, like, home,profile, search,upload}
+export { icon, companyLogo, camera,dm, like, home,profile, search,upload, bookmark, comment}

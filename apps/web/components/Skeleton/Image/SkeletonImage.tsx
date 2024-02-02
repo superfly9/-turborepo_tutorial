@@ -10,7 +10,7 @@ function SkeletonImage({ length, gridRepeat }: Props) {
   const count = length || 1;
   const repeat = gridRepeat || 1;
   return (
-    <div className={`${styles.container} grid_${styles[repeat]}`}>
+    <div className={`${styles.container} ${styles[`grid_${repeat}`]}`}>
       {Array(count)
         .fill(true)
         .map((_, idx) => (

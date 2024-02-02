@@ -1,19 +1,20 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import { getData } from "@/util/fetch";
-import { RandomUser } from "app/(home)/user/route";
 import Image from "next/image";
 import styles from "./Feed.module.css";
+import { like, comment, dm, bookmark } from "public";
+import Link from "next/link";
+import { RandomFeed } from "app/api/feed/route";
+import { getData } from "util/fetch";
 import List from "components/List";
-import { like, upload, profile } from "public";
 
 function Feed() {
-  const [list, setList] = useState<RandomUser[]>([]);
+  const [list, setList] = useState<RandomFeed[]>([]);
 
   const target = useRef(null);
 
   useEffect(() => {
-    getData<RandomUser>("/user", 10).then((userList) => {
+    getData<RandomFeed>("/api/feed", 10).then((userList) => {
       setList((v) => [...v, ...userList]);
     });
   }, []);
@@ -23,7 +24,7 @@ function Feed() {
     if (target?.current) {
       observer = new IntersectionObserver(async ([entry]) => {
         if (entry?.isIntersecting) {
-          const newList = await getData<RandomUser>("/user", 10);
+          const newList = await getData<RandomFeed>("/api/feed", 10);
           setList((v) => [...v, ...newList]);
         }
       });
@@ -32,19 +33,34 @@ function Feed() {
     return () => observer?.disconnect();
   }, [target?.current]);
 
-  const renderFeed = (item: RandomUser) => {
-    const { avatar, firstName, lastName, description } = item;
+  const renderFeed = (item: RandomFeed) => {
+    const { image, firstName, lastName, description, _id: id } = item;
+    const nickName = `${firstName}${lastName}`;
     return (
       <>
-        <div className={styles.img_container}>
-          <Image src={avatar} alt={`${firstName}${lastName}_profile`} fill />
-        </div>
-        <div>
-          <Image src={upload} alt="게시물" width={30} height={30} />
-          <Image src={like} alt="좋아요" width={30} height={30} />
-          <Image src={profile} alt="프로필" width={30} height={30} />
-        </div>
-        <p style={{ position: "relative" }}>{description}</p>
+        <article className={styles.img_container}>
+          <Image src={image} alt={`${firstName}${lastName}_profile`} fill />
+        </article>
+        <article className={styles.btn}>
+          <div className={styles.left_btn}>
+            <Image src={like} alt="좋아요" width={30} height={30} />
+            <Image src={comment} alt="댓글" width={30} height={30} />
+            <Image src={dm} alt="dm" width={30} height={30} />
+          </div>
+          <Image src={bookmark} alt="스크랩" width={30} height={30} />
+        </article>
+        <article>
+          <Link className={styles.profile} href={`/${id}`}>
+            {nickName}
+          </Link>
+          <p className={styles.description}>{description}</p>
+        </article>
+        <article className={styles.additionalInfo}>
+          <Link className={styles.comment} href={`/p${id}/comment`}>
+            댓글 {Math.ceil(Math.random() * 50)}개 모두 보기
+          </Link>
+          <span className={styles.postDate}>4시간 전</span>
+        </article>
       </>
     );
   };

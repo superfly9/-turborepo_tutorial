@@ -5,7 +5,6 @@ import ModalProvider from "@/context/ModalContext/Provider";
 import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
 import { authOptions } from "app/api/auth/[...nextauth]/options";
-import { Suspense } from "react";
 
 export default async function HomePage() {
   const session = await getServerSession(authOptions);
@@ -14,15 +13,10 @@ export default async function HomePage() {
     redirect("/api/auth/signin");
   }
   return (
-    <main
-      className={styles.main}
-      style={{ display: "flex", flexDirection: "column" }}
-    >
+    <main className={styles.main}>
       <ModalProvider>
         <Story />
-        <Suspense fallback={<>Loading...</>}>
-          <Feed />
-        </Suspense>
+        <Feed />
       </ModalProvider>
     </main>
   );

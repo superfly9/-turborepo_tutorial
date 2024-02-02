@@ -45,7 +45,7 @@ function ListWithObserver({
   const renderImage = (item: SearchTabImage, index: number) => {
     const { url, _id } = item;
     return (
-      <div key={_id} className={styles.imgContainer}>
+      <div key={_id} className={`${styles.imgContainer} grid_${styles.imgContainer}}`}>
         <Image
           src={url}
           onLoad={() => {
