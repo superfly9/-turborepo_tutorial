@@ -21,8 +21,9 @@
   display: block;
   margin-top: 10px;
 }
-.clickBtn {
+.clickableBtn {
   border: none;
+  background-color: transparent;
 }
 .description {
   font-weight: 500;

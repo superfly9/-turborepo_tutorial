@@ -1,7 +1,8 @@
 import { faker } from '@faker-js/faker';
 import { NextResponse } from 'next/server';
+import { MAX_COUNT, MAX_LIKE, MAX_FEED_IMAGE_COUNT } from './constants';
 
-const MAX_LIKE = 100_00
+
 function createRandomFeed() {
   
   const sex = faker.person.sexType();
@@ -12,10 +13,11 @@ function createRandomFeed() {
       firstName,
       lastName,
       sex,
-      image: faker.image.urlLoremFlickr({category:'city'}),
+      images: faker.helpers.multiple(()=>faker.image.urlLoremFlickr({category:'city'}), {count :Math.ceil( Math.random()* MAX_FEED_IMAGE_COUNT) }),
       title : faker.lorem.word(),
       description:faker.lorem.paragraph({ min: 1, max: 3 }),
-      likeCount :  Math.ceil(Math.random() * MAX_LIKE)
+      likeCount :  Math.ceil(Math.random() * MAX_LIKE),
+      commentCount : Math.ceil(Math.random() * MAX_COUNT)
     };
   }
 
