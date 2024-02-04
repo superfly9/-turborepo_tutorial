@@ -1,8 +1,7 @@
-import Skeleton from "app/(search)/search/_component/Skeleton";
 import React from "react";
-import styles from "./loading.module.css";
+import SkeletonImage from "components/Skeleton/Image/SkeletonImage";
 
 function HomeLoading() {
-  return <Skeleton length={10} />;
+  return <SkeletonImage length={15} />;
 }
 export default HomeLoading;

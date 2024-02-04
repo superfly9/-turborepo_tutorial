@@ -14,25 +14,21 @@ import Link from "next/link";
 import { RandomFeed } from "app/api/feed/route";
 import { getData } from "util/fetch";
 import List from "components/List";
+import SkeletonImage from "components/Skeleton/Image/SkeletonImage";
 
 function Feed() {
   const [list, setList] = useState<RandomFeed[]>([]);
   const [liked, setLiked] = useState<boolean>(false);
   const [bookMakred, setBookMarked] = useState<boolean>(false);
   const target = useRef(null);
-
-  useEffect(() => {
-    getData<RandomFeed>("/api/feed", 10).then((userList) => {
-      setList((v) => [...v, ...userList]);
-    });
-  }, []);
+  const imageRef = useRef<HTMLDivElement[]>([]);
 
   useEffect(() => {
     let observer: IntersectionObserver;
     if (target?.current) {
       observer = new IntersectionObserver(async ([entry]) => {
         if (entry?.isIntersecting) {
-          const newList = await getData<RandomFeed>("/api/feed", 10);
+          const newList = await getData<RandomFeed>("/api/feed");
           setList((v) => [...v, ...newList]);
         }
       });
@@ -48,7 +44,7 @@ function Feed() {
     setLiked((prev) => !prev);
   };
 
-  const renderFeed = (item: RandomFeed) => {
+  const renderFeed = (item: RandomFeed, index: number) => {
     const {
       images,
       firstName,
@@ -62,9 +58,21 @@ function Feed() {
     return (
       <>
         <article className={styles.img_container}>
-          {images.map((src) => (
-            <Image src={src} alt={`${firstName}${lastName}_profile`} fill />
-          ))}
+          <>
+            {images.map((src) => (
+              <Image
+                key={`img_${index}`}
+                src={src}
+                alt={`${firstName}${lastName}_profile`}
+                fill
+              />
+            ))}
+            <div
+              ref={(node: HTMLDivElement) => (imageRef.current[index] = node)}
+            >
+              <SkeletonImage />
+            </div>
+          </>
         </article>
         <article className={styles.btn}>
           <div className={styles.left_btn}>
@@ -108,7 +116,7 @@ function Feed() {
   };
 
   return (
-    <div className={styles.wrapper}>
+    <>
       <List
         items={list}
         renderItem={renderFeed}
@@ -117,7 +125,7 @@ function Feed() {
         }}
       />
       <div ref={target} />
-    </div>
+    </>
   );
 }
 

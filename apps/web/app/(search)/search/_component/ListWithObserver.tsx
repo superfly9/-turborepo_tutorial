@@ -1,6 +1,5 @@
 "use client";
 import { SearchTabImage } from "app/api/search/route";
-import SearchInput from "components/Input";
 import Image from "next/image";
 import { CSSProperties, useEffect, useRef, useState } from "react";
 import styles from "./ListWithObserver.module.css";
@@ -45,7 +44,10 @@ function ListWithObserver({
   const renderImage = (item: SearchTabImage, index: number) => {
     const { url, _id } = item;
     return (
-      <div key={_id} className={`${styles.imgContainer} grid_${styles.imgContainer}}`}>
+      <div
+        key={_id}
+        className={`${styles.imgContainer} grid_${styles.imgContainer}}`}
+      >
         <Image
           src={url}
           onLoad={() => {

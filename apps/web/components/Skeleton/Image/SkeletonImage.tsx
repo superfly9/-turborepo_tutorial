@@ -1,4 +1,4 @@
-import React, { forwardRef } from "react";
+import React from "react";
 import styles from "./SkeletonImage.module.css";
 
 interface Props {
@@ -20,4 +20,4 @@ function SkeletonImage({ length, gridRepeat }: Props) {
   );
 }
 
-export default forwardRef(SkeletonImage);
+export default SkeletonImage;
