@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import styles from "./Feed.module.css";
-import { like, comment, dm, bookmark } from "public";
+import { like, comment, dm, bookmark, bookMarkFilled } from "public";
 import Link from "next/link";
 import { RandomFeed } from "app/api/feed/route";
 import { getData } from "util/fetch";
@@ -10,7 +10,7 @@ import List from "components/List";
 
 function Feed() {
   const [list, setList] = useState<RandomFeed[]>([]);
-
+  const [bookMakred, setBookMarked] = useState<boolean>(false);
   const target = useRef(null);
 
   useEffect(() => {
@@ -33,8 +33,19 @@ function Feed() {
     return () => observer?.disconnect();
   }, [target?.current]);
 
+  const clickBookmark = () => {
+    setBookMarked((prev) => !prev);
+  };
+
   const renderFeed = (item: RandomFeed) => {
-    const { image, firstName, lastName, description, _id: id } = item;
+    const {
+      image,
+      firstName,
+      lastName,
+      description,
+      _id: id,
+      likeCount,
+    } = item;
     const nickName = `${firstName}${lastName}`;
     return (
       <>
@@ -44,12 +55,22 @@ function Feed() {
         <article className={styles.btn}>
           <div className={styles.left_btn}>
             <Image src={like} alt="좋아요" width={30} height={30} />
-            <Image src={comment} alt="댓글" width={30} height={30} />
+            <Link href={`/p${id}/comment`}>
+              <Image src={comment} alt="댓글" width={30} height={30} />
+            </Link>
             <Image src={dm} alt="dm" width={30} height={30} />
           </div>
-          <Image src={bookmark} alt="스크랩" width={30} height={30} />
+          <button className={styles.clickBtn} onClick={clickBookmark}>
+            <Image
+              src={bookMakred ? bookMarkFilled : bookmark}
+              alt="스크랩"
+              width={30}
+              height={30}
+            />
+          </button>
         </article>
         <article>
+          <strong className={styles.like}>좋아요 {likeCount}개</strong>
           <Link className={styles.profile} href={`/${id}`}>
             {nickName}
           </Link>

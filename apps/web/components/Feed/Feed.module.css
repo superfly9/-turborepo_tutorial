@@ -17,6 +17,13 @@
   margin-top: 10px;
   font-weight: 700;
 }
+.like {
+  display: block;
+  margin-top: 10px;
+}
+.clickBtn {
+  border: none;
+}
 .description {
   font-weight: 500;
   margin-top: 5px;

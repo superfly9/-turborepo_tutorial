@@ -1,6 +1,7 @@
 import { faker } from '@faker-js/faker';
 import { NextResponse } from 'next/server';
 
+const MAX_LIKE = 100_00
 function createRandomFeed() {
   
   const sex = faker.person.sexType();
@@ -13,7 +14,8 @@ function createRandomFeed() {
       sex,
       image: faker.image.urlLoremFlickr({category:'city'}),
       title : faker.lorem.word(),
-      description:faker.lorem.paragraph({ min: 1, max: 3 })
+      description:faker.lorem.paragraph({ min: 1, max: 3 }),
+      likeCount :  Math.ceil(Math.random() * MAX_LIKE)
     };
   }
 
