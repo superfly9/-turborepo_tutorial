@@ -1,13 +1,12 @@
 "use client";
+import { useRef } from "react";
+import Image from "next/image";
 import { SearchTabImage } from "app/api/search/route";
 import ListWithObserver from "components/List/ListWithObserver";
 import SearchInput from "components/Input/SearchInput";
-import Image from "next/image";
 import SkeletonImage from "components/Skeleton/Image/SkeletonImage";
-import { useRef } from "react";
 
 const getImage = async <T,>(): Promise<T> => {
-  "use server";
   const response = await fetch(`${process.env.NEXT_PUBLIC_DOMAIN}/api/search`, {
     cache: "no-store",
   });
@@ -15,12 +14,12 @@ const getImage = async <T,>(): Promise<T> => {
   return response.json();
 };
 
-async function Search() {
+function Search() {
   const imageRef = useRef<HTMLDivElement[]>([]);
   const renderImage = (item: SearchTabImage, index: number) => {
     const { url, _id } = item;
     return (
-      <div key={_id}>
+      <div key={_id} style={{ position: "relative" }}>
         <Image
           src={url}
           onLoad={() => {
@@ -41,11 +40,14 @@ async function Search() {
     <>
       <SearchInput />
       <ListWithObserver<SearchTabImage>
-        style={{
+        containerStyle={{
           display: "grid",
           gridTemplateColumns: "repeat(3, 1fr)",
           gap: "5px",
-          marginTop: "10px",
+        }}
+        itemStyle={{
+          display: "grid",
+          aspectRatio: 1,
         }}
         renderItem={renderImage}
         fetchCallback={getImage}

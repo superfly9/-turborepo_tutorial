@@ -1,12 +1,12 @@
 "use client";
-import { CSSProperties, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, ReactNode, CSSProperties } from "react";
 import List from "components/List";
 
 interface fetchCallback<T> {
   (): Promise<T>;
 }
 interface renderItem<T> {
-  (item: T, index: number): JSX.Element;
+  (item: T, index: number): ReactNode;
 }
 
 interface Props<T> {
@@ -14,7 +14,7 @@ interface Props<T> {
   fetchCallback: fetchCallback<T[]>;
   renderItem: renderItem<T>;
   containerStyle?: CSSProperties;
-  style?: CSSProperties;
+  itemStyle?: CSSProperties;
 }
 
 function ListWithObserver<T>({
@@ -22,7 +22,7 @@ function ListWithObserver<T>({
   fetchCallback,
   renderItem,
   containerStyle,
-  style,
+  itemStyle,
 }: Props<T>) {
   const [list, setList] = useState(listData);
   const target = useRef(null);
@@ -43,9 +43,12 @@ function ListWithObserver<T>({
 
   return (
     <>
-      <div style={containerStyle}>
-        <List items={list} renderItem={renderItem} style={style} />
-      </div>
+      <List
+        items={list}
+        renderItem={renderItem}
+        containerStyle={containerStyle}
+        itemStyle={itemStyle}
+      />
       <div ref={target} />
     </>
   );
