@@ -1,41 +1,24 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import Image from "next/image";
 import styles from "./Feed.module.css";
-import {
-  like,
-  comment,
-  dm,
-  bookmark,
-  bookMarkFilled,
-  likeFilled,
-} from "public";
 import Link from "next/link";
 import { RandomFeed } from "app/api/feed/route";
 import { getData } from "util/fetch";
-import List from "components/List";
+import { Carousel } from "antd";
 import SkeletonImage from "components/Skeleton/Image/SkeletonImage";
+import ListWithObserver from "components/List/ListWithObserver";
+import {like,comment,dm,bookmark,bookMarkFilled,likeFilled} from "public";
 
 function Feed() {
-  const [list, setList] = useState<RandomFeed[]>([]);
   const [liked, setLiked] = useState<boolean>(false);
   const [bookMakred, setBookMarked] = useState<boolean>(false);
   const target = useRef(null);
   const imageRef = useRef<HTMLDivElement[]>([]);
 
-  useEffect(() => {
-    let observer: IntersectionObserver;
-    if (target?.current) {
-      observer = new IntersectionObserver(async ([entry]) => {
-        if (entry?.isIntersecting) {
-          const newList = await getData<RandomFeed>("/api/feed");
-          setList((v) => [...v, ...newList]);
-        }
-      });
-      observer?.observe(target?.current);
-    }
-    return () => observer?.disconnect();
-  }, [target?.current]);
+  const fetchCallback = async (): Promise<RandomFeed[]> => {
+    return getData<RandomFeed>("/api/feed");
+  };
 
   const clickBookmark = () => {
     setBookMarked((prev) => !prev);
@@ -44,7 +27,7 @@ function Feed() {
     setLiked((prev) => !prev);
   };
 
-  const renderFeed = (item: RandomFeed, index: number) => {
+  const renderFeed = (item: RandomFeed, rowIndex: number) => {
     const {
       images,
       firstName,
@@ -57,22 +40,31 @@ function Feed() {
     const nickName = `${firstName}${lastName}`;
     return (
       <>
-        <article className={styles.img_container}>
-          <>
-            {images.map((src) => (
-              <Image
-                key={`img_${index}`}
-                src={src}
-                alt={`${firstName}${lastName}_profile`}
-                fill
-              />
-            ))}
-            <div
-              ref={(node: HTMLDivElement) => (imageRef.current[index] = node)}
-            >
-              <SkeletonImage />
-            </div>
-          </>
+        <article className={styles.container}>
+          <Carousel>
+            {images.map((src, imgIdx) => {
+              const key = `${rowIndex}${imgIdx}`;
+              return (
+                <div className={styles.img_container} key={`img_${key}`}>
+                  <Image
+                    src={src}
+                    alt={`${firstName}${lastName}_profile`}
+                    onLoad={() => imageRef.current[rowIndex]?.remove()}
+                    fill
+                  />
+                </div>
+              );
+            })}
+          </Carousel>
+          <article
+            className={styles.loader}
+            ref={(node: HTMLDivElement) => {
+              if (!node) return;
+              imageRef.current[rowIndex] = node;
+            }}
+          >
+            <SkeletonImage />
+          </article>
         </article>
         <article className={styles.btn}>
           <div className={styles.left_btn}>
@@ -117,12 +109,13 @@ function Feed() {
 
   return (
     <>
-      <List
-        items={list}
-        renderItem={renderFeed}
-        itemStyle={{
-          aspectRatio: "1",
+      <ListWithObserver<RandomFeed>
+        containerStyle={{
+          position: "relative",
+          aspectRatio: "1/1",
         }}
+        renderItem={renderFeed}
+        fetchCallback={fetchCallback}
       />
       <div ref={target} />
     </>
@@ -130,3 +123,8 @@ function Feed() {
 }
 
 export default Feed;
+
+interface IProps<T> {
+  data: T[];
+}
+export const YourComponent = <T,>(props: IProps<T>) => {};

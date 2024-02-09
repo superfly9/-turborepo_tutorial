@@ -1,6 +1,15 @@
+.container {
+  position: relative;
+}
+.loader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
 .img_container {
   position: relative;
-  height: 100%;
+  aspect-ratio: 1;
 }
 .btn {
   margin-top: 20px;
