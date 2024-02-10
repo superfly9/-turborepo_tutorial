@@ -1,53 +1,76 @@
 "use client";
 
+import {
+  ModalComponent,
+  ModalDispatch,
+  ModalProps,
+  ModalState,
+} from "@/types/context/modal";
+import Modal from "components/Modal";
 import React, {
   useContext,
   useMemo,
   useState,
   useCallback,
   ReactNode,
+  createContext,
 } from "react";
 
 interface Props {
   children: ReactNode;
 }
 
-export const ModalContext = React.createContext({
-  isOpen: false,
-  openModal: (param: any) => {},
+export const ModalDispatchContext = createContext<ModalDispatch>({
+  openModal: () => {},
   closeModal: () => {},
 });
 
+export const ModalStateContext = createContext<ModalState>([]);
+
 function ModalProvider({ children }: Props) {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [modalInfo, setModalInfo] = useState<any>(undefined);
-  const openModal = useCallback((param: any) => {
-    setIsOpen(true);
-    setModalInfo({ ...param });
+  const [modalState, setModalState] = useState<ModalState>([]);
+
+  const openModal = useCallback(
+    (Component: ModalComponent, props: ModalProps) => {
+      setModalState((modals) => [...modals, { Component, props }]);
+    },
+    []
+  );
+
+  const closeModal = useCallback((Component: ModalComponent) => {
+    setModalState((modals) => {
+      return modals.filter((modal) => modal.Component !== Component);
+    });
   }, []);
 
-  const closeModal = useCallback(() => {
-    setIsOpen(false);
-    setModalInfo(null);
-  }, []);
-  const value = useMemo(() => {
+  const dispatch = useMemo(() => {
     return {
-      isOpen,
-      modalInfo,
       openModal,
       closeModal,
     };
-  }, [isOpen, modalInfo, openModal, closeModal]);
+  }, [openModal, closeModal]);
 
   return (
-    <ModalContext.Provider value={value}>
-      {<>{children}</>}
-    </ModalContext.Provider>
+    <ModalDispatchContext.Provider value={dispatch}>
+      <ModalStateContext.Provider value={modalState}>
+        {children}
+        <Modal />
+      </ModalStateContext.Provider>
+    </ModalDispatchContext.Provider>
   );
 }
 
 export default ModalProvider;
 
-export const useModalContext = () => {
-  return useContext(ModalContext);
+export const useModalDispatchContext = () => {
+  if (!ModalDispatchContext) {
+    throw Error("ModalDispatchContext is not exist");
+  }
+  return useContext(ModalDispatchContext);
+};
+export const useModalStateContext = () => {
+  if (!ModalStateContext) {
+    throw Error("ModalStateContext is not exist");
+  }
+  return useContext(ModalStateContext);
 };

@@ -16,10 +16,15 @@ const getImage = async <T,>(): Promise<T> => {
 
 function Search() {
   const imageRef = useRef<HTMLDivElement[]>([]);
+  const handleClickFeedOpenBtn = () => {};
   const renderImage = (item: SearchTabImage, index: number) => {
     const { url, _id } = item;
     return (
-      <div key={_id} style={{ position: "relative" }}>
+      <button
+        key={_id}
+        style={{ position: "relative", border: "none" }}
+        onClick={handleClickFeedOpenBtn}
+      >
         <Image
           src={url}
           onLoad={() => {
@@ -32,7 +37,7 @@ function Search() {
         <div ref={(node: HTMLDivElement) => (imageRef.current[index] = node)}>
           <SkeletonImage />
         </div>
-      </div>
+      </button>
     );
   };
 
