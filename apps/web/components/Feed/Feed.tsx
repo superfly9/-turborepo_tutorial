@@ -8,7 +8,14 @@ import { getData } from "util/fetch";
 import { Carousel } from "antd";
 import SkeletonImage from "components/Skeleton/Image/SkeletonImage";
 import ListWithObserver from "components/List/ListWithObserver";
-import {like,comment,dm,bookmark,bookMarkFilled,likeFilled} from "public";
+import {
+  like,
+  comment,
+  dm,
+  bookmark,
+  bookMarkFilled,
+  likeFilled,
+} from "public";
 
 function Feed() {
   const [liked, setLiked] = useState<boolean>(false);
@@ -123,8 +130,3 @@ function Feed() {
 }
 
 export default Feed;
-
-interface IProps<T> {
-  data: T[];
-}
-export const YourComponent = <T,>(props: IProps<T>) => {};

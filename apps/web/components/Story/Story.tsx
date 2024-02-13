@@ -2,23 +2,19 @@
 import React, { useState, useEffect } from "react";
 import { getData } from "@/util/fetch";
 import { Button } from "@repo/ui/src/button";
-import Modal from "components/Modal";
 import { RandomStory } from "app/(home)/story/route";
 import Image from "next/image";
 import styles from "./Story.module.css";
-import { useModalContext } from "@/context/ModalContext/Provider";
 
 function Story() {
   const [storyList, setStoryList] = useState<RandomStory[]>([]);
   const [currentStoryIdx, setCurrentStoryIdx] = useState<number>(0);
-  const { isOpen, openModal } = useModalContext();
   useEffect(() => {
     getData<RandomStory>("/story").then((v) => {
       setStoryList([...v]);
     });
   }, []);
   const handleClick = (modalContent: RandomStory, idx: number) => {
-    openModal(modalContent);
     setCurrentStoryIdx(idx);
   };
 
@@ -47,40 +43,6 @@ function Story() {
           </div>
         );
       })}
-      {isOpen && (
-        <Modal>
-          <>
-            <ul>
-              {storyList.map((_, idx) => (
-                <li
-                  onClick={() => setCurrentStoryIdx(idx)}
-                  key={`tab-${idx}`}
-                  style={{
-                    width: `calc(100vw /${storyList.length} - 3px)`,
-                    height: "2px",
-                    left: `calc((70vw /${storyList.length}) * ${idx})`,
-                  }}
-                  className={styles.tab}
-                />
-              ))}
-            </ul>
-            {storyList.map(({ firstName, avatar }, index) => (
-              <div
-                className={`${styles.content_wrapper}  ${
-                  currentStoryIdx === index ? styles.active : ""
-                }`}
-              >
-                <div
-                  className={styles.content}
-                  onClick={() => handleStoryDivider(index)}
-                >
-                  <Image src={avatar} alt={firstName} fill />
-                </div>
-              </div>
-            ))}
-          </>
-        </Modal>
-      )}
     </div>
   );
 }
