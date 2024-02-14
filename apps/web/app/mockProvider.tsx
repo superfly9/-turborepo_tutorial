@@ -10,7 +10,7 @@ export function MockProvider({
 
   useEffect(() => {
     async function enableApiMocking() {
-      const { worker } = await import("./mocks/browser");
+      const { worker } = await import("../mocks/browser");
       await worker.start();
       enableMocking(true);
     }

@@ -3,7 +3,7 @@ import "./global.css";
 import { Inter } from "next/font/google";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import ModalProvider from "@/context/ModalContext/Provider";
-import { MockProvider } from "./mockProvider";
+import { MockProvider } from "./MockProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
