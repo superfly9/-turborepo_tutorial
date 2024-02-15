@@ -2,43 +2,43 @@
 import React, { useState, useEffect } from "react";
 import { getData } from "@/util/fetch";
 import { Button } from "@repo/ui/src/button";
-import { RandomStory } from "app/(home)/story/route";
 import Image from "next/image";
 import styles from "./Story.module.css";
+import StoryModal from "app/(home)/_component/StoryModal";
+import { useModalDispatchContext } from "../../context/ModalContext/Provider";
+import { RandomStory } from "@/mocks/response/story";
 
 function Story() {
+  const { openModal } = useModalDispatchContext();
   const [storyList, setStoryList] = useState<RandomStory[]>([]);
   const [currentStoryIdx, setCurrentStoryIdx] = useState<number>(0);
   useEffect(() => {
-    getData<RandomStory>("/story").then((v) => {
-      setStoryList([...v]);
+    getData<RandomStory>("/api/story").then((result) => {
+      setStoryList(result);
     });
   }, []);
   const handleClick = (modalContent: RandomStory, idx: number) => {
     setCurrentStoryIdx(idx);
-  };
-
-  const handleStoryDivider = (idx: number) => {
-    setCurrentStoryIdx(idx);
+    openModal(StoryModal, { isOpen: true, modalContent });
   };
 
   return (
     <div className={styles.wrapper}>
-      {storyList.map(({ avatar, _id, firstName, ...rest }, index) => {
+      {storyList.map(({ avatar, nickname, _id, ...rest }, index) => {
         const isFirst = index === 0;
         return (
           <div className={styles.story} key={_id}>
             <Button
               className={styles.story_profile}
               onClick={() =>
-                handleClick({ avatar, _id, firstName, ...rest }, index)
+                handleClick({ avatar, nickname, _id, ...rest }, index)
               }
               key={_id}
             >
-              <Image src={avatar} width={62} height={62} alt={firstName} />
+              <Image src={avatar} width={62} height={62} alt={nickname} />
             </Button>
             <span className={styles.name}>
-              {isFirst ? "Your Story" : firstName}
+              {isFirst ? "Your Story" : nickname}
             </span>
           </div>
         );

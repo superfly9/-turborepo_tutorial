@@ -1,24 +1,20 @@
 import { faker } from '@faker-js/faker';
-import { NextResponse } from 'next/server';
+import { MAX_FEED_IMAGE_COUNT } from 'app/api/feed/constants';
 
 function createRandomStory() {
   
-  const sex = faker.person.sexType();
+    const sex = faker.person.sexType();
     const firstName = faker.person.firstName(sex);
     const lastName = faker.person.lastName();
     return {
       _id: faker.string.uuid(),
-      firstName,
-      lastName,
-      sex,
+      nickname:firstName + lastName,
       avatar: faker.image.avatar(),
+      images: faker.helpers.multiple(()=>faker.image.urlLoremFlickr({category:'dog'}), {count :Math.ceil( Math.random()* MAX_FEED_IMAGE_COUNT) }),
       title : faker.lorem.word(),
       description:faker.lorem.paragraph({ min: 1, max: 3 })
     };
   }
 
 export type RandomStory = ReturnType<typeof createRandomStory>
-export async function GET() {
-    const res = faker.helpers.multiple(createRandomStory, { count: 10 })
-    return NextResponse.json(res)
-}
+export const getRandomStory = ()=>faker.helpers.multiple(createRandomStory, { count: 10 })

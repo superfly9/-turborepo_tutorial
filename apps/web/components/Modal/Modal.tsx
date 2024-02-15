@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import {
   useModalDispatchContext,
@@ -13,8 +15,8 @@ function Modal() {
         const { Component, props } = modal;
         if (!Component || !props) return null;
         const { onSubmit, ...rest } = props;
-        const onClose = () => closeModal(Component);
-        return <Component key={index} onClose={onClose} {...rest} />;
+        const closeBtnClick = () => closeModal(Component);
+        return <Component key={index} onClose={closeBtnClick} {...rest} />;
       })}
     </>
   );
