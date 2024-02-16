@@ -1,8 +1,6 @@
 import {http , HttpResponse} from 'msw'
 import { SUCCESS } from './code';
-import { getFeedList } from './response/feed'
-import { getSearchList } from './response/searchList';
-import { getRandomStory } from './response/story';
+import { getFeedList,getSearchList,getRandomStory} from './response'
 
 export const handlers = [
     http.get(`/api/feed`, ()=>{

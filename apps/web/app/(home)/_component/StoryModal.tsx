@@ -1,5 +1,5 @@
 import React from "react";
-import { Modal } from "antd";
+import { Carousel, Modal } from "antd";
 import Image from "next/image";
 import { RandomStory } from "@/mocks/response/story";
 import styles from "./StoryModal.module.css";
@@ -13,17 +13,33 @@ interface Props {
 function StoryModal({ isOpen, onClose, modalContent }: Props) {
   const { avatar, nickname, images } = modalContent;
   const title = (
-    <>
+    <div className={styles.profile}>
       <Image src={avatar} alt={nickname} width={30} height={30} />
       <strong>{nickname}</strong>
-      <button>팔로우</button>
-    </>
+      <button className={styles.followBtn}>팔로우</button>
+    </div>
   );
   return (
-    <Modal title={title} open={isOpen} onCancel={onClose} footer={<></>}>
-      {images.map((src, index) => (
-        <Image src={src} alt={`${src}_${index}`} width={30} height={30} />
-      ))}
+    <Modal
+      style={{ top: 0, height: "100%" }}
+      title={title}
+      open={isOpen}
+      onCancel={onClose}
+      footer={<></>}
+    >
+      <Carousel dots={false}>
+        {images.map((src, index) => (
+          <div className={styles.container}>
+            <Image
+              key={index}
+              src={src}
+              alt={`${src}_${index}`}
+              fill
+              style={{ aspectRatio: 1 }}
+            />
+          </div>
+        ))}
+      </Carousel>
     </Modal>
   );
 }
