@@ -3,6 +3,7 @@ import { Carousel, Modal } from "antd";
 import Image from "next/image";
 import { RandomStory } from "@/mocks/response/story";
 import styles from "./StoryModal.module.css";
+import StoryBtn from "./StoryBtn";
 
 interface Props {
   isOpen: boolean;
@@ -21,25 +22,30 @@ function StoryModal({ isOpen, onClose, modalContent }: Props) {
   );
   return (
     <Modal
-      style={{ top: 0, height: "100%" }}
+      style={{ top: 0 }}
       title={title}
       open={isOpen}
       onCancel={onClose}
       footer={<></>}
+      keyboard
+      maskClosable
     >
       <Carousel dots={false}>
         {images.map((src, index) => (
-          <div className={styles.container}>
-            <Image
-              key={index}
-              src={src}
-              alt={`${src}_${index}`}
-              fill
-              style={{ aspectRatio: 1 }}
-            />
+          <div className={styles.container} key={`story_${index}`}>
+            <div className={styles.imgContainer}>
+              <Image
+                key={index}
+                src={src}
+                alt={`${src}_${index}`}
+                fill
+                style={{ aspectRatio: 1, objectFit: "contain" }}
+              />
+            </div>
           </div>
         ))}
       </Carousel>
+      <StoryBtn />
     </Modal>
   );
 }

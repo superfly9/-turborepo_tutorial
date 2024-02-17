@@ -3,9 +3,10 @@
   column-gap: 8px;
   align-items: center;
 }
-.container {
+.imgContainer {
   position: relative;
-  height: 100vh;
+  aspect-ratio: 1;
+  height: 70vh;
 }
 .followBtn {
   background: none;
