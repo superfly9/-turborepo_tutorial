@@ -6,14 +6,19 @@
     "dev": "turbo dev",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "dev@web": "yarn workspace web dev"
+    "dev@web": "yarn workspace web dev",
+    "test@web": "yarn workspace web test"
   },
   "devDependencies": {
     "@faker-js/faker": "^8.3.1",
     "@repo/eslint-config": "*",
     "@repo/typescript-config": "*",
+    "@testing-library/react": "^14.2.1",
+    "@vitejs/plugin-react": "^4.2.1",
+    "jsdom": "^24.0.0",
     "prettier": "^3.1.0",
-    "turbo": "latest"
+    "turbo": "latest",
+    "vitest": "^1.3.0"
   },
   "engines": {
     "node": ">=18"
