@@ -16,11 +16,5 @@ export default async function RootLayout({
   if (currentUser) {
     redirect("/");
   }
-  return (
-    <html lang="en">
-      <AntdRegistry>
-        <body>{children}</body>
-      </AntdRegistry>
-    </html>
-  );
+  return <AntdRegistry>{children}</AntdRegistry>;
 }

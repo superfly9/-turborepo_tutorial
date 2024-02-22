@@ -1,18 +1,21 @@
 import {http , HttpResponse} from 'msw'
 import { SUCCESS } from './code';
-import { getFeedList,getSearchList,getRandomStory} from './response'
+import { apiRoutes } from '@/apiRoute';
+import response from '@/mocks/response/api'
+
+const API_DOMAIN = 'http://localhost:3000';
 
 export const handlers = [
     http.get(`/api/feed`, ()=>{
-        const feedList = getFeedList();
+        const feedList = response[apiRoutes.feed];
         return HttpResponse.json(feedList, {status:SUCCESS})
     }),
     http.get(`/api/search`, ()=>{
-        const searchList = getSearchList()
+        const searchList = response[apiRoutes.search]
         return HttpResponse.json(searchList, {status:SUCCESS})
     }),
     http.get(`/api/story`, ()=>{
-        const stroyList = getRandomStory();
+        const stroyList = response[apiRoutes.story]
         return HttpResponse.json(stroyList, {status:SUCCESS})
     })
 ]

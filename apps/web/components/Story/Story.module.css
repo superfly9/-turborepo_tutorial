@@ -6,11 +6,15 @@
   overflow-x: scroll;
   margin-bottom: 20px;
 }
-.story {
+.container {
   width: 62px;
   text-align: center;
 }
-.story_profile {
+.storyBtn {
+  border: none;
+  background:transparent;
+}
+.profile {
   position: relative;
   overflow: hidden;
   width: 62px;

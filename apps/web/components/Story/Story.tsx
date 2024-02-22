@@ -13,7 +13,7 @@ function Story() {
   const [storyList, setStoryList] = useState<RandomStory[]>([]);
   const [currentStoryIdx, setCurrentStoryIdx] = useState<number>(0);
   useEffect(() => {
-    getData<RandomStory>("/api/story").then((result) => {
+    getData<RandomStory>(`http://localhost:3000/api/story`).then((result) => {
       setStoryList(result);
     });
   }, []);
@@ -27,19 +27,25 @@ function Story() {
       {storyList.map(({ avatar, nickname, _id, ...rest }, index) => {
         const isFirst = index === 0;
         return (
-          <div className={styles.story} key={_id}>
+          <div className={styles.container} key={_id}>
             <Button
-              className={styles.story_profile}
+              className={styles.storyBtn}
               onClick={() =>
                 handleClick({ avatar, nickname, _id, ...rest }, index)
               }
               key={_id}
             >
-              <Image src={avatar} width={62} height={62} alt={nickname} />
+              <Image
+                src={avatar}
+                width={62}
+                height={62}
+                alt={nickname}
+                className={styles.profile}
+              />
+              <span className={styles.name}>
+                {isFirst ? "Your Story" : nickname}
+              </span>
             </Button>
-            <span className={styles.name}>
-              {isFirst ? "Your Story" : nickname}
-            </span>
           </div>
         );
       })}
